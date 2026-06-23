@@ -1,16 +1,14 @@
-2. In the main text content box, paste this final configuration snippet:
-   ```jsx
-   import './globals.css';
+import './globals.css';
 
-   export const metadata = {
-     title: 'SportGrid News Network',
-     description: 'Live Football Scores, Breaking News, and Transfer Centers',
-   };
+export const metadata = {
+  title: 'SportGrid News Network',
+  description: 'Your ultimate destination for live football news and data matrices.',
+};
 
-   export default function RootLayout({ children }) {
-     return (
-       <html lang="en">
-         <body>{children}</body>
-       </html>
-     );
-   }
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  );
+}
