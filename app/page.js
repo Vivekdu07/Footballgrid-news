@@ -11,7 +11,7 @@ const tickerMatches = [
 
 const mainFeature = {
   title: "TACTICAL MASTERCLASS: HOW THE UNDERDOGS SHATTERED THE DEFENSIVE WALL",
-  excerpt: "An in-depth analysis of tonight's historical tactical shift. We break down the high-pressing system that left the reigning tournament champions scrambling for answers in a chaotic second half.",
+  excerpt: "An in-depth analysis of tonight&apos;s historical tactical shift. We break down the high-pressing system that left the reigning tournament champions scrambling for answers in a chaotic second half.",
   category: "Tactical Analysis",
   author: "Alex Mercer",
   time: "15m ago",
@@ -39,7 +39,7 @@ const trendingHeadlines = [
   { id: 1, title: "Transfer Rumors: Giants eye $90m summer bid for midfield prodigy", views: "45K reads" },
   { id: 2, title: "Ref Review: Controversial VAR penalty decision explained by official board", views: "32K reads" },
   { id: 3, title: "Fan Voice: The best stadium banners and chants captured this weekend", views: "28K reads" },
-  { id: 4, title: "Manager Presser: 'We didn't respect the game plan' says defeated boss", views: "19K reads" },
+  { id: 4, title: "Manager Presser: &apos;We didn&apos;t respect the game plan&apos; says defeated boss", views: "19K reads" },
 ];
 
 export default function Home() {
@@ -188,12 +188,12 @@ export default function Home() {
             <a href="#">Contact Us</a>
           </div>
           <div className="text-[11px] text-slate-600 font-medium tracking-wide">
-            <p>© {new Date().getFullYear()} FOOTBALLGRID DIGITAL NETWORK.</p>
+            <p>© 2026 FOOTBALLGRID DIGITAL NETWORK.</p>
           </div>
         </div>
       </footer>
 
     </div>
   );
-}
-
+    }
+                
