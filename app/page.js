@@ -1,199 +1,131 @@
-"use client";
-import React, { useState } from 'react';
-
-const tickerMatches = [
-  { id: 1, home: "ARG", away: "FRA", score: "2 - 1", status: "82'", event: "LIVE" },
-  { id: 2, home: "BRA", away: "GER", score: "0 - 0", status: "HT", event: "LIVE" },
-  { id: 3, home: "ENG", away: "ESP", score: "1 - 3", status: "FT", event: "COMPLETED" },
-  { id: 4, home: "MAR", away: "POR", score: "19:30", status: "TODAY", event: "UPCOMING" },
-  { id: 5, home: "USA", away: "MEX", score: "22:00", status: "TODAY", event: "UPCOMING" },
-];
-
-const mainFeature = {
-  title: "TACTICAL MASTERCLASS: HOW THE UNDERDOGS SHATTERED THE DEFENSIVE WALL",
-  excerpt: "An in-depth analysis of tonight&apos;s historical tactical shift. We break down the high-pressing system that left the reigning tournament champions scrambling for answers in a chaotic second half.",
-  category: "Tactical Analysis",
+// Mock data representing a professional API feed response
+const featuredArticle = {
+  id: 1,
+  category: "TACTICAL ANALYSIS",
+  title: "Tactical Masterclass: How The Underdogs Shattered The Defensive Wall",
+  description: "An in-depth analysis of tonight's historical tactical shift. We break down the high-press system that left the reigning tournament champions scrambling for answers in a chaotic second half.",
   author: "Alex Mercer",
   time: "15m ago",
-  image: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=1200&auto=format&fit=crop&q=80"
+  image: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&q=80&w=1200", 
 };
 
-const secondaryNews = [
-  {
-    id: 1,
-    title: "Breaking: Star Winger Ruled Out of Crucial Knockout Stage Following Hamstring Scan",
-    category: "Injury Update",
-    time: "45m ago",
-    image: "https://images.unsplash.com/photo-1517649763962-0c623066013b?w=400&auto=format&fit=crop&q=80"
-  },
+const secondaryArticles = [
   {
     id: 2,
-    title: "Golden Boot Standings: Top Strikers Going Head-to-Head as Final Rounds Approach",
-    category: "Stats Hub",
+    category: "INJURY UPDATE",
+    title: "Star Winger Ruled Out of Crucial Knockout Stage Following Hamstring Scan",
+    time: "45m ago",
+    image: "https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&q=80&w=600",
+  },
+  {
+    id: 3,
+    category: "STATS HUB",
+    title: "Golden Boot Standings: Top Stakers Going Head-to-Head as Final Rounds Approach",
     time: "2h ago",
-    image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=400&auto=format&fit=crop&q=80"
-  }
+    image: "https://images.unsplash.com/photo-1579527631856-26e2b9f5c711?auto=format&fit=crop&q=80&w=600",
+  },
 ];
 
-const trendingHeadlines = [
-  { id: 1, title: "Transfer Rumors: Giants eye $90m summer bid for midfield prodigy", views: "45K reads" },
-  { id: 2, title: "Ref Review: Controversial VAR penalty decision explained by official board", views: "32K reads" },
-  { id: 3, title: "Fan Voice: The best stadium banners and chants captured this weekend", views: "28K reads" },
-  { id: 4, title: "Manager Presser: &apos;We didn&apos;t respect the game plan&apos; says defeated boss", views: "19K reads" },
+const liveMatches = [
+  { id: 'm1', home: 'ARG', homeScore: 2, away: 'FRA', awayScore: 1, status: "82'" },
+  { id: 'm2', home: 'BRA', homeScore: 0, away: 'GER', awayScore: 0, status: "HT" },
+  { id: 'm3', home: 'ENG', homeScore: 1, away: 'ESP', awayScore: 3, status: "FT" },
 ];
 
 export default function Home() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   return (
-    <div className="min-h-screen bg-[#0b0f19] text-slate-100 font-sans antialiased selection:bg-lime-400 selection:text-slate-900">
+    <div className="space-y-10 text-slate-100 font-sans antialiased">
       
-      {/* 1. HORIZONTAL LIVE MATCH TICKER */}
-      <div className="bg-[#05070c] border-b border-slate-800 py-2.5 overflow-x-auto whitespace-nowrap sticky top-0 z-50 shadow-md">
-        <div className="flex items-center space-x-4 px-4 min-w-max">
-          <div className="flex items-center space-x-1.5 bg-red-600/10 text-red-500 text-[11px] font-black tracking-widest uppercase px-2.5 py-1 rounded border border-red-500/20">
-            <span className="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse"></span>
-            <span>Live Center</span>
-          </div>
-          
-          {tickerMatches.map((match) => (
-            <div key={match.id} className="inline-flex items-center space-x-3 text-xs bg-[#111625] px-4 py-1.5 rounded border border-slate-800 hover:border-slate-700 transition cursor-pointer">
-              <span className="font-bold tracking-wide text-slate-300">{match.home}</span>
-              <span className={`px-2 py-0.5 rounded font-mono font-bold text-center min-w-[50px] ${
-                match.event === 'LIVE' ? 'bg-slate-900 text-lime-400 border border-lime-500/30' : 'bg-slate-900 text-slate-400'
-              }`}>
-                {match.score}
-              </span>
-              <span className="font-bold tracking-wide text-slate-300">{match.away}</span>
-              <span className={`text-[10px] font-bold uppercase tracking-wider pl-2 border-l border-slate-700 ${
-                match.event === 'LIVE' ? 'text-lime-400' : 'text-slate-500'
-              }`}>
+      {/* 🚀 SECTION 1: LIVE MATCH TICKER STRIP */}
+      <section className="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-xl">
+        <div className="flex items-center gap-3 mb-3 border-b border-slate-800 pb-2">
+          <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+          <h2 className="text-xs font-black tracking-widest text-slate-400 uppercase">Live Matches</h2>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {liveMatches.map((match) => (
+            <div key={match.id} className="bg-slate-950/60 p-3 rounded-lg border border-slate-800/80 flex items-center justify-between hover:border-slate-700 transition-colors">
+              <div className="flex flex-col gap-1 text-sm font-bold">
+                <div className="flex justify-between w-28"><span>{match.home}</span> <span>{match.homeScore}</span></div>
+                <div className="flex justify-between w-28"><span>{match.away}</span> <span>{match.awayScore}</span></div>
+              </div>
+              <span className={`text-xs font-extrabold px-2 py-1 rounded ${match.status === 'FT' ? 'bg-slate-800 text-slate-400' : 'bg-red-500/10 text-red-500 animate-pulse'}`}>
                 {match.status}
               </span>
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* 2. MAIN HEADER WITH NAV BAR */}
-      <header className="border-b border-slate-800 bg-[#0b0f19]/90 backdrop-blur-md sticky top-[45px] z-40">
-        <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between relative">
-          
-          <div className="flex items-center space-x-8">
-            <h1 className="text-3xl font-black italic tracking-tighter uppercase text-white cursor-pointer">
-              SPORT<span className="text-lime-400">GRID</span>
-            </h1>
-            
-            <nav className="hidden lg:flex space-x-6 text-xs font-black uppercase tracking-widest text-slate-400">
-              <a href="#" className="text-lime-400 border-b-2 border-lime-400 pb-7 pt-1">Home</a>
-              <a href="#" className="hover:text-white transition pb-7 pt-1">Matches</a>
-              <a href="#" className="hover:text-white transition pb-7 pt-1">News Archive</a>
-              <a href="#" className="hover:text-white transition pb-7 pt-1">Transfer Centre</a>
-              <a href="#" className="hover:text-white transition pb-7 pt-1">Tables</a>
-            </nav>
-          </div>
-
-          <div className="flex items-center space-x-4">
-            <span className="text-[11px] font-bold uppercase tracking-widest text-slate-400 hidden sm:inline-flex items-center gap-2 bg-slate-950 px-3 py-1.5 rounded-full border border-slate-800">
-              <span className="h-1.5 w-1.5 rounded-full bg-lime-400"></span> Tournament Mode Active
-            </span>
-
-            <button 
-              onClick={() => setIsMenuOpen(!isMenuOpen)} 
-              className="p-2 text-white bg-slate-950 rounded-lg border border-slate-800 hover:bg-slate-900 transition focus:outline-none"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                {isMenuOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M4 6h16M4 12h16M4 18h16" />
-                )}
-              </svg>
-            </button>
-          </div>
-
-          {/* MOBILE DROPDOWN */}
-          {isMenuOpen && (
-            <div className="absolute right-4 top-20 w-72 bg-white text-slate-900 rounded-xl shadow-2xl border border-slate-200 p-4 z-50">
-              <div className="flex gap-2 mb-4 border-b border-slate-100 pb-4">
-                <button className="flex-1 border border-blue-600 text-blue-600 font-extrabold text-xs py-2.5 rounded-lg">Log In</button>
-                <button className="flex-1 bg-blue-600 text-white font-extrabold text-xs py-2.5 rounded-lg">Get Alerts</button>
-              </div>
-              <nav className="flex flex-col space-y-3.5 text-sm font-black uppercase tracking-wider text-slate-800">
-                <a href="#" className="text-blue-600">Home</a>
-                <a href="#" className="hover:text-blue-600 flex justify-between items-center">Sports <span>▼</span></a>
-                <a href="#" className="hover:text-blue-600 flex justify-between items-center">Live Scores <span>▼</span></a>
-              </nav>
+      {/* 📰 SECTION 2: CORE NEWS PLATFORM GRID LAYOUT */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        {/* LEFT & CENTER COLUMNS: HERO FEATURED NEWS */}
+        <div className="lg:col-span-2 space-y-8">
+          <div className="group cursor-pointer block bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-slate-700 transition-all duration-300 shadow-2xl">
+            <div className="relative aspect-[16/9] w-full bg-slate-800 overflow-hidden">
+              <img 
+                src={featuredArticle.image} 
+                alt={featuredArticle.title}
+                className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
+              />
             </div>
-          )}
-
+            <div className="p-6 sm:p-8 space-y-4">
+              <span className="inline-block text-xs font-black tracking-widest text-red-500 uppercase">{featuredArticle.category}</span>
+              <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-white group-hover:text-red-400 transition-colors leading-tight">
+                {featuredArticle.title}
+              </h2>
+              <p className="text-sm text-slate-400 leading-relaxed font-normal">
+                {featuredArticle.description}
+              </p>
+              <div className="flex items-center gap-2 pt-2 text-xs font-semibold text-slate-500">
+                <span>By {featuredArticle.author}</span>
+                <span>•</span>
+                <span>{featuredArticle.time}</span>
+              </div>
+            </div>
+          </div>
         </div>
-      </header>
 
-      {/* 3. CORE NEWS CONTENT HUB */}
-      <main className="max-w-7xl mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          
-          {/* HERO */}
-          <div className="lg:col-span-7">
-            <div className="relative group rounded-xl overflow-hidden border border-slate-800 bg-[#111625] h-full flex flex-col justify-end min-h-[450px]">
-              <div className="absolute top-4 left-4 z-20 bg-lime-400 text-slate-950 font-black text-[10px] uppercase tracking-widest px-2.5 py-1 rounded">
-                {mainFeature.category}
-              </div>
-              <img src={mainFeature.image} alt="" className="absolute inset-0 w-full h-full object-cover brightness-[0.35]" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0b0f19] via-[#0b0f19]/30 to-transparent z-10"></div>
-              <div className="p-6 md:p-8 space-y-3 relative z-20">
-                <h2 className="text-2xl md:text-4xl font-black tracking-tight uppercase leading-none text-white">
-                  {mainFeature.title}
-                </h2>
-                <p className="text-slate-300 text-xs md:text-sm line-clamp-2">
-                  {mainFeature.excerpt}
-                </p>
-                <div className="text-[11px] text-slate-400 font-bold uppercase tracking-wider pt-2">
-                  <span className="text-white">{mainFeature.author}</span> • {mainFeature.time}
+        {/* RIGHT COLUMN: SUB-NEWS FEED LIST */}
+        <div className="space-y-6">
+          <h3 className="text-xs font-black tracking-widest text-slate-400 uppercase border-b border-slate-800 pb-2">Latest Updates</h3>
+          <div className="space-y-4">
+            {secondaryArticles.map((article) => (
+              <div key={article.id} className="group cursor-pointer flex gap-4 bg-slate-900 border border-slate-800 p-3 rounded-xl hover:border-slate-700 transition-all shadow-md">
+                <div className="relative w-24 h-24 sm:w-28 sm:h-28 flex-shrink-0 bg-slate-800 rounded-lg overflow-hidden">
+                  <img 
+                    src={article.image} 
+                    alt={article.title}
+                    className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
-              </div>
-            </div>
-          </div>
-
-          {/* SIDE CARDS */}
-          <div className="lg:col-span-5 flex flex-col gap-4">
-            {secondaryNews.map((article) => (
-              <div key={article.id} className="bg-[#111625] rounded-xl overflow-hidden border border-slate-800 flex p-4 gap-4 hover:border-slate-700 transition cursor-pointer">
-                <div className="w-1/3 rounded-lg overflow-hidden relative min-h-[100px]">
-                  <img src={article.image} alt="" className="w-full h-full object-cover" />
-                </div>
-                <div className="w-2/3 flex flex-col justify-between">
-                  <div>
-                    <span className="text-[10px] font-black uppercase tracking-wider text-lime-400 block mb-1">{article.category}</span>
-                    <h3 className="font-extrabold text-sm text-white leading-snug line-clamp-3 uppercase">
+                <div className="flex flex-col justify-between py-1">
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-black tracking-wider text-red-500 uppercase">{article.category}</span>
+                    <h4 className="text-sm font-bold text-white line-clamp-2 leading-snug group-hover:text-red-400 transition-colors">
                       {article.title}
-                    </h3>
+                    </h4>
                   </div>
-                  <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">{article.time}</span>
+                  <span className="text-[11px] font-medium text-slate-500">{article.time}</span>
                 </div>
               </div>
             ))}
           </div>
-
         </div>
-      </main>
 
-      {/* 4. COMPLIANT FOOTER */}
-      <footer className="border-t border-slate-800 bg-[#05070c] mt-20 py-12">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col items-center space-y-6">
-          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs font-bold tracking-wider uppercase text-slate-500">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Contact Us</a>
-          </div>
-          <div className="text-[11px] text-slate-600 font-medium tracking-wide">
-            <p>© 2026 FOOTBALLGRID DIGITAL NETWORK.</p>
-          </div>
+      </div>
+
+      {/* 🗺️ FOOTER LEGAL BOUNDARY */}
+      <footer className="border-t border-slate-800 pt-8 pb-12 flex flex-col sm:flex-row items-center justify-between text-xs font-medium text-slate-500 gap-4">
+        <p>© 2026 SPORTGRID DIGITAL NETWORK. ALL RIGHTS RESERVED.</p>
+        <div className="flex gap-6">
+          <a href="#" className="hover:text-slate-300 transition-colors">Privacy Policy</a>
+          <a href="#" className="hover:text-slate-300 transition-colors">Terms of Service</a>
+          <a href="#" className="hover:text-slate-300 transition-colors">Contact Us</a>
         </div>
       </footer>
 
     </div>
   );
-    }
-                
+}
